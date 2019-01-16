@@ -31,7 +31,44 @@ public class MergeSort {
 		    nums[left++] = tem[index++];
 		  }
 		}
-
+		// 归并排序，非递归实现(迭代)
+		  public void sortMergeIteration(int[] nums) {
+		    int len = 1;  // 初始排序数组的长度
+		    while(len < nums.length) {
+		      for(int i = 0; i < nums.length; i += len * 2) {
+		        sortMergeIterationHelper(nums, i, len);
+		      }
+		      len *= 2;  // 每次将排序数组的长度*2
+		    }
+		  }
+		  /**
+		   * 辅助函数
+		   * @param nums  原数组
+		   * @param start 从start位置开始
+		   * @param len  本次合并的数组长度
+		   */
+		  public void sortMergeIterationHelper(int[] nums, int start, int len) {
+		    int[] tem = new int[len * 2];
+		    int i = start;
+		    int j = start + len;
+		    int k = 0;
+		    while(i < start + len && (j < start + len + len && j < nums.length)) {
+		      tem[k++] = nums[i] < nums[j]? nums[i++] : nums[j++];
+		    }
+		    while(i < start + len && i < nums.length) {  // 注意：这里i也可能超出长度
+		      tem[k++] = nums[i++];
+		    }
+		    while(j < start + len + len && j < nums.length) {
+		      tem[k++] = nums[j++];
+		    }
+		    int right = start + len + len;
+		    int index = 0;
+		    while(start < nums.length && start < right) {
+		      nums[start++] = tem[index++];
+		    }
+		  }
+	
+		
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int[] b = new int[] {5,2,7,4,6,9,1,3,8};
