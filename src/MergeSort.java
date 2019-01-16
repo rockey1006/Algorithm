@@ -1,4 +1,4 @@
-import java.util.Arrays;
+import java.util.Arrays;//
 public class MergeSort {
 	
 		// 归并排序，递归实现
